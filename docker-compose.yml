@@ -34,8 +34,8 @@ services:
         monitor: 60s
         max_failure_ratio: 0.3
     volumes:
-      - ${CONFIGloc}:/config
-      - ${CACHEloc}:/cache
+      - /var/lib/docker/volumes/jellyfin_swarm/config:/config
+      - /var/lib/docker/volumes/jellyfin_swarm/cache:/cache
       - type: bind
         source: /media/Multimedia
         target: /media
