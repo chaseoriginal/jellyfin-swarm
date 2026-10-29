@@ -8,8 +8,8 @@ deployment and polls this repository for changes.
 | Portainer stack id | 1 |
 | Portainer host | ore-dock-110-4 |
 | Endpoint | - (id -) |
-| Swarm | whofnrgxv5ig |
-| Live service | jellyfin-swarm_jellyfin |
+| Swarm | True |
+| Live service | svc:jellyfin-swarm_jellyfin |
 | Git repo | https://github.com/chaseoriginal/jellyfin-swarm |
 | Compose file | `docker-compose.yml` |
 | Auto-update poll | every 900s |
@@ -39,8 +39,8 @@ deployment and polls this repository for changes.
 ## Verifying a deployment
 
 ```bash
-docker service ls --filter name=jellyfin-swarm_jellyfin
-docker service inspect jellyfin-swarm_jellyfin --format '{{json .Spec.TaskTemplate.ContainerSpec.Mounts}}'
+docker service ls --filter name=svc:jellyfin-swarm_jellyfin
+docker service inspect svc:jellyfin-swarm_jellyfin --format '{{json .Spec.TaskTemplate.ContainerSpec.Mounts}}'
 ```
 
 A healthy stack shows `1/1` and the same volume names as before.
