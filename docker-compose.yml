@@ -4,24 +4,24 @@ services:
     container_name: jellyfin-swarm
     user: ${uid}:${gid}
     ports:
-      - target: 8096
-        published: 8096
-        protocol: tcp
-        mode: host
-      - target: 7359
-        published: 7359
-        protocol: udp
-        mode: host
-      - target: 8920
-        published: 8920
-        protocol: tcp
-        mode: host
+    - target: 8096
+      published: 8096
+      protocol: tcp
+      mode: host
+    - target: 7359
+      published: 7359
+      protocol: udp
+      mode: host
+    - target: 8920
+      published: 8920
+      protocol: tcp
+      mode: host
     deploy:
       mode: replicated
       replicas: 1
       placement:
         constraints:
-          - node.labels.deployment.target.jellyfin == true
+        - node.labels.deployment.target.jellyfin == true
       restart_policy:
         condition: any
         delay: 5s
@@ -34,15 +34,9 @@ services:
         monitor: 60s
         max_failure_ratio: 0.3
     volumes:
-      - /var/lib/docker/volumes/jellyfin_swarm/config:/config
-      - /var/lib/docker/volumes/jellyfin_swarm/cache:/cache
-      - type: bind
-        source: /media/Multimedia
-        target: /media
-        read_only: true
-    # Optional - alternative address used for autodiscovery
+    - /var/lib/docker/volumes/jellyfin_swarm/config:/config
+    - /var/lib/docker/volumes/jellyfin_swarm/cache:/cache
+    - /media/Multimedia:/media
     environment:
-      - JELLYFIN_PublishedServerUrl=https://jelly.echoinggreen.net
-    # Optional - may be necessary for docker healthcheck to pass if running in host network mode
-    #extra_hosts:
-    #  - 'host.docker.internal:host-gateway'
+    - JELLYFIN_PublishedServerUrl=https://jelly.echoinggreen.net
+volumes: {}
