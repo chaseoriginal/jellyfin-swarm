@@ -1,8 +1,7 @@
 services:
   jellyfin:
-    image: jellyfin/jellyfin
+    image: jellyfin/jellyfin:latest
     container_name: jellyfin-swarm
-    user: ${uid}:${gid}
     ports:
     - target: 8096
       published: 8096
